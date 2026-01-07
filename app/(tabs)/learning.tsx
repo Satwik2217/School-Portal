@@ -1,44 +1,73 @@
-import { collection, onSnapshot, query } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react';
-import { FlatList, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { db } from '../../firebaseConfig';
+import { Ionicons } from '@expo/vector-icons'; // Built-in with Expo
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function LearningScreen() {
-  const [lessons, setLessons] = useState([]);
-
-  useEffect(() => {
-    const q = query(collection(db, "curriculum"));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      setLessons(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-    });
-    return () => unsubscribe();
-  }, []);
-
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Digital Classroom</Text>
-      <FlatList
-        data={lessons}
-        renderItem={({ item }) => (
-          <TouchableOpacity 
-            style={styles.card} 
-            onPress={() => Linking.openURL(item.videoLink)} // Opens a YouTube video or PDF
-          >
-            <Text style={styles.subject}>{item.subject}</Text>
-            <Text style={styles.topic}>{item.topic}</Text>
-            <Text style={styles.linkText}>▶ Watch Lesson</Text>
-          </TouchableOpacity>
-        )}
-      />
+      {/* 1. Visual Icon for Maintenance */}
+      <Ionicons name="construct-outline" size={80} color="#007AFF" />
+      
+      {/* 2. Professional Status Message */}
+      <Text style={styles.title}>Under Construction</Text>
+      
+      <View style={styles.card}>
+        <Text style={styles.message}>
+          The Digital Classroom is currently undergoing maintenance to bring you high-quality video lessons and study materials.
+        </Text>
+        
+        <Text style={styles.subMessage}>
+          Expected Launch: Coming Soon
+        </Text>
+      </View>
+
+      {/* 3. Branding for your 10k project */}
+      <Text style={styles.footer}>Powered by SchoolSync v1.0</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: '#fff' },
-  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20 },
-  card: { padding: 20, backgroundColor: '#f0f7ff', borderRadius: 15, marginBottom: 15 },
-  subject: { fontSize: 12, color: '#007AFF', fontWeight: 'bold', textTransform: 'uppercase' },
-  topic: { fontSize: 18, fontWeight: '500', marginVertical: 5 },
-  linkText: { color: '#007AFF', marginTop: 10, fontWeight: 'bold' }
+  container: { 
+    flex: 1, 
+    padding: 30, 
+    backgroundColor: '#fff', 
+    justifyContent: 'center', 
+    alignItems: 'center' 
+  },
+  title: { 
+    fontSize: 26, 
+    fontWeight: 'bold', 
+    marginTop: 20, 
+    color: '#2c3e50' 
+  },
+  card: { 
+    padding: 20, 
+    backgroundColor: '#f0f7ff', 
+    borderRadius: 15, 
+    marginTop: 20, 
+    width: '100%',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#d0e3ff'
+  },
+  message: { 
+    fontSize: 16, 
+    color: '#34495e', 
+    textAlign: 'center', 
+    lineHeight: 24 
+  },
+  subMessage: { 
+    fontSize: 14, 
+    color: '#007AFF', 
+    fontWeight: 'bold', 
+    marginTop: 15 
+  },
+  footer: { 
+    position: 'absolute', 
+    bottom: 30, 
+    color: '#bdc3c7', 
+    fontSize: 12, 
+    fontWeight: 'bold' 
+  }
 });

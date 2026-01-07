@@ -3,13 +3,10 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 
 export default function TabLayout() {
-  // SET THIS TO TRUE FOR PILOT, FALSE FOR FULL VERSION
-  const isPilotMode = true; 
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#007AFF',
+        tabBarActiveTintColor: '#007AFF', // Professional Blue
         tabBarInactiveTintColor: 'gray',
         headerShown: true,
         tabBarStyle: {
@@ -21,7 +18,7 @@ export default function TabLayout() {
         },
       }}
     >
-      {/* 1. NOTICES - ALWAYS VISIBLE */}
+      {/* 1. NOTICES */}
       <Tabs.Screen
         name="notices"
         options={{
@@ -30,7 +27,7 @@ export default function TabLayout() {
         }}
       />
 
-      {/* 2. HOMEWORK - ALWAYS VISIBLE */}
+      {/* 2. HOMEWORK */}
       <Tabs.Screen
         name="homework"
         options={{
@@ -39,28 +36,26 @@ export default function TabLayout() {
         }}
       />
 
-      {/* 3. DIGITAL CLASSROOM - HIDE IN PILOT */}
+      {/* 3. DIGITAL CLASSROOM (NEW) */}
       <Tabs.Screen
-        name="learning"
-        options={{
-          href: isPilotMode ? null : '/learning', // This hides the tab button
-          title: 'Learning',
-          tabBarIcon: ({ color, size }) => <Ionicons name="videocam-outline" size={size} color={color} />,
-          headerTitle: 'Digital Classroom',
-        }}
-      />
+  name="learning" // MUST MATCH THE FILE NAME learning.tsx
+  options={{
+    title: 'Learning',
+    tabBarIcon: ({ color, size }) => <Ionicons name="videocam-outline" size={size} color={color} />,
+    headerTitle: 'Digital Classroom', // Users see this at the top
+  }}
+/>
 
-      {/* 4. GRADES - HIDE IN PILOT */}
+      {/* 4. GRADES (NEW) */}
       <Tabs.Screen
         name="grades"
         options={{
-          href: isPilotMode ? null : '/grades', // This hides the tab button
           title: 'Grades',
           tabBarIcon: ({ color, size }) => <Ionicons name="stats-chart-outline" size={size} color={color} />,
         }}
       />
 
-      {/* 5. QUERIES - ALWAYS VISIBLE (PROVES VALUE) */}
+      {/* 5. QUERIES */}
       <Tabs.Screen
         name="queries"
         options={{
@@ -69,17 +64,17 @@ export default function TabLayout() {
         }}
       />
 
-      {/* 6. INFO - HIDE IN PILOT */}
+      {/* 6. INFO (NEW) */}
       <Tabs.Screen
         name="info"
         options={{
-          href: isPilotMode ? null : '/info', // This hides the tab button
           title: 'Info',
           tabBarIcon: ({ color, size }) => <Ionicons name="information-circle-outline" size={size} color={color} />,
+          headerTitle: 'School Information',
         }}
       />
 
-      {/* 7. PROFILE - ALWAYS VISIBLE */}
+      {/* 7. PROFILE */}
       <Tabs.Screen
         name="profile"
         options={{
